@@ -74,8 +74,8 @@ class ShareController extends Controller
      */
     public function byPlatform(Request $request)
     {
-        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date) : Carbon::now()->subDays(30);
-        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay() : Carbon::now()->endOfDay();
+        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date, 'Asia/Kuala_Lumpur')->startOfDay()->utc() : Carbon::now()->subDays(30)->utc();
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date, 'Asia/Kuala_Lumpur')->endOfDay()->utc() : Carbon::now()->endOfDay()->utc();
 
         $query = Share::selectRaw('platform_name, count(*) as total')
             ->whereBetween('created_at', [$startDate, $endDate])
@@ -90,8 +90,8 @@ class ShareController extends Controller
      */
     public function byDate(Request $request)
     {
-        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date) : Carbon::now()->subDays(30);
-        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay() : Carbon::now()->endOfDay();
+        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date, 'Asia/Kuala_Lumpur')->startOfDay()->utc() : Carbon::now()->subDays(30)->utc();
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date, 'Asia/Kuala_Lumpur')->endOfDay()->utc() : Carbon::now()->endOfDay()->utc();
         $platformId = $request->platform_id;
 
         $query = Share::selectRaw('DATE(created_at) as date, platform_name, count(*) as total')
@@ -111,8 +111,8 @@ class ShareController extends Controller
      */
     public function stats(Request $request)
     {
-        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date) : Carbon::now()->subDays(30);
-        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date)->endOfDay() : Carbon::now()->endOfDay();
+        $startDate = $request->start_date ? Carbon::createFromFormat('Y-m-d', $request->start_date, 'Asia/Kuala_Lumpur')->startOfDay()->utc() : Carbon::now()->subDays(30)->utc();
+        $endDate = $request->end_date ? Carbon::createFromFormat('Y-m-d', $request->end_date, 'Asia/Kuala_Lumpur')->endOfDay()->utc() : Carbon::now()->endOfDay()->utc();
         $platformId = $request->platform_id;
 
         $query = Share::whereBetween('created_at', [$startDate, $endDate]);
