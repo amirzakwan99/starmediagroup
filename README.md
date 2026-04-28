@@ -57,6 +57,12 @@ DB_DATABASE=<anything>
 DB_USERNAME=<anything>
 DB_PASSWORD=<anything>
 ```
+If the .env file is changed at any point of time, please run commands below
+
+```bash
+php artisan config:clear
+php artisan cache:clear
+```
 
 5. **Install PHP dependencies**
 
